@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MoneyTransfer.UI.Models.TransferViewModel>
+
+@{
+    ViewData["Title"] = "Transferler";
+    var accounts = ViewBag.Accounts as List<MoneyTransfer.UI.Models.AccountViewModel>;
+}
+
+<h1>Transferler</h1>
+<div class="row">
+    <form method="get" action="/Transfer/Index/" class="col-md-4">
+        <div>
+            <label for="accountId" class="control-label">Hesap Seç:</label>
+            <select id="accountId" name="accountId" class="form-control">
+                <option value="">--Hesap Seç--</option>
+                @foreach (var account in accounts)
+                {
+                    <option value="@account.Id">Hesap No: @account.AccountNumber - Bakiye: @account.Balance @account.AccountCurrency</option>
+                }
+            </select>
+            <label for="startDate" class="control-label">Başlangıç:</label>
+            <input type="date" id="startDate" name="startDate" class="form-control" />
+            <label for="endDate" class="control-label">Bitiş:</label>
+            <input type="date" id="endDate" name="endDate" class="form-control" />
+            <button type="submit" class="btn btn-dark mt-2">Getir</button>
+        </div>
+    </form>
+</div>
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FromCustomerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToCustomerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransferCurrency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FromCustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ToCustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransferCurrency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

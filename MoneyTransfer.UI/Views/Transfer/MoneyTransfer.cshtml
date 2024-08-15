@@ -1,0 +1,45 @@
+﻿@model MoneyTransfer.UI.Models.TransferViewModel
+
+@{
+    ViewData["Title"] = "Para Transfer";
+    var accounts = ViewBag.Accounts as List<MoneyTransfer.UI.Models.AccountViewModel> ?? new List<MoneyTransfer.UI.Models.AccountViewModel>();
+}
+
+<h1>Para Transferi</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MoneyTransfer">
+            <div class="form-group">
+                <label for="accountFromId" class="control-label">Gönderilecek Hesap</label>
+                <select asp-for="AccountFromId" class="form-control">
+                    <option value="">--Hesap Seç--</option>
+                    @foreach (var account in accounts)
+                    {
+                        <option value="@account.Id">Hesap No: @account.AccountNumber - Bakiye: @account.Balance @account.AccountCurrency</option>
+                    }
+                </select>
+                <span asp-validation-for="AccountFromId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ToAccountNumber" class="control-label">Alıcı Hesap Numarası</label>
+                <input asp-for="ToAccountNumber" class="form-control" />
+                <span asp-validation-for="ToAccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Gönder" class="btn btn-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+

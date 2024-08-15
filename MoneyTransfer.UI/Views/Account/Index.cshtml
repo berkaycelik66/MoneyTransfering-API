@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MoneyTransfer.UI.Models.AccountViewModel>
+
+@{
+    ViewData["Title"] = "Hesaplar";
+}
+
+<h1>Hesap Listesi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountCurrency)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountCurrency)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
