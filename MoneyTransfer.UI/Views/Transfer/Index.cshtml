@@ -12,7 +12,7 @@
             <label for="accountId" class="control-label">Hesap Seç:</label>
             <select id="accountId" name="accountId" class="form-control">
                 <option value="">--Hesap Seç--</option>
-                @foreach (var account in accounts)
+                @foreach (var account in accounts!)
                 {
                     <option value="@account.Id">Hesap No: @account.AccountNumber - Bakiye: @account.Balance @account.AccountCurrency</option>
                 }
