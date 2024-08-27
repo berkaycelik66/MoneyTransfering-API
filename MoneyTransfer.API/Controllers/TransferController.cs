@@ -83,7 +83,6 @@ namespace MoneyTransfer.API.Controllers
             }
             var transfers = _transferService.GetAllTransfersByAccountIdWithCustomer(accountId);
 
-
             if (startDate.HasValue && endDate.HasValue) //İki kısım da dolu ise
             {
                 transfers = transfers.Where(t => t.Date.Date >= startDate && t.Date.Date <= endDate).ToList();
@@ -97,12 +96,22 @@ namespace MoneyTransfer.API.Controllers
                 transfers = transfers.Where(t => t.Date.Date <= endDate).ToList();
             }
 
-            if (transfers == null || transfers.Count == 0)
+            if ((transfers == null || transfers.Count == 0) && !startDate.HasValue && !endDate.HasValue)
             {
                 return NotFound(new ApiResponse
                 {
                     StatusCode = "404",
                     Message = "Bu müşteriye ait hesap hareketi bulunmamaktadır.",
+                    IsSucceed = false
+                });
+            }
+
+            if ((transfers == null || transfers.Count == 0) && (startDate.HasValue || endDate.HasValue))
+            {
+                return NotFound(new ApiResponse
+                {
+                    StatusCode = "404",
+                    Message = "Belirtilen tarih aralığında bir hesap hareketi bulunmamaktadır.",
                     IsSucceed = false
                 });
             }

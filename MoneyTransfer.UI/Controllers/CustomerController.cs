@@ -112,7 +112,7 @@ namespace MoneyTransfer.UI.Controllers
                     var tokenValue = tokens.AccessToken.ToString();
                     var cookieOptions = new CookieOptions
                     {
-                        Expires = DateTime.Now.AddMinutes(10),
+                        Expires = DateTime.Now.AddHours(1),
                         HttpOnly = true, // Make the cookie inaccessible to JavaScript
                         Secure = true // Ensure the cookie is sent over HTTPS
                     };
